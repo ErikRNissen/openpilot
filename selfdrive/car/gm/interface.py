@@ -33,8 +33,8 @@ class CarInterface(CarInterfaceBase):
     ret.openpilotLongitudinalControl = ret.enableCamera
     tire_stiffness_factor = 0.444  # not optimized yet
 
-    # Start with a baseline lateral tuning for all GM vehicles. Override tuning as needed in each model section below.
-    ret.minSteerSpeed = 7 * CV.MPH_TO_MS
+    # set min steer to 4 from 7
+    ret.minSteerSpeed = 4 * CV.MPH_TO_MS
     ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
     ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.2], [0.00]]
     ret.lateralTuning.pid.kf = 0.00004   # full torque for 20 deg at 80mph means 0.00007818594
@@ -42,8 +42,8 @@ class CarInterface(CarInterfaceBase):
     ret.steerActuatorDelay = 0.1  # Default delay, not measured yet
 
     if candidate == CAR.VOLT:
-      # supports stop and go, but initial engage must be above 18mph (which include conservatism)
-      ret.minEnableSpeed = 18 * CV.MPH_TO_MS
+      # changed min set speed to 1 from 18
+      ret.minEnableSpeed = 1 * CV.MPH_TO_MS
       ret.mass = 1607. + STD_CARGO_KG
       ret.wheelbase = 2.69
       ret.steerRatio = 15.7
